@@ -1,4 +1,6 @@
 const btnSubmit = document.querySelector('button');
+const form = document.querySelector('form');
+const inputs = document.querySelectorAll('input[type="number"]');
 
 // Extrair a informação do DOM
 function validarData(event){
@@ -107,5 +109,25 @@ function resultado(resultadoFinal){
 // Adicionar o resultado no DOM
 
 
+function handleChange(event){
+  const name = event.target.name;
+  const value = event.target.value; 
+  saveValues(name,value);
+  console.log(event)
+}
 
-// Animar números
+function saveValues(name,value){
+  localStorage[name] = value;
+}
+
+form.addEventListener('change',handleChange);
+
+
+function setValues(){
+  const propriedades = Object.keys(localStorage);
+  propriedades.forEach((propriedade) => {
+    console.log(localStorage[propriedade])
+    form.elements[propriedade].value  = localStorage[propriedade];
+  })
+}
+setValues();
