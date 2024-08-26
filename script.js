@@ -34,9 +34,11 @@ function validarAno(){
   if(ano > anoAtual){
     inputAno.previousElementSibling.classList.add('ativo');
     inputAno.nextElementSibling.classList.add('ativo');
+    inputAno.classList.add('ativo')
   }else{
     inputAno.previousElementSibling.classList.remove('ativo');
     inputAno.nextElementSibling.classList.remove('ativo');
+    inputAno.classList.remove('ativo')
   }
 }
 
