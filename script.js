@@ -14,11 +14,13 @@ function validarData(event){
     if(isNaN(dataNascimento)){
       input.previousElementSibling.classList.add('ativo');
       input.nextElementSibling.classList.add('ativo');
+      input.classList.add('ativo');
       dataValidacao = [1,12,1900]
     } else{
       dataValidacao.reverse();
       input.previousElementSibling.classList.remove('ativo');
       input.nextElementSibling.classList.remove('ativo');
+      input.classList.remove('ativo');
     }
   })
   validarAno();
@@ -36,7 +38,6 @@ function validarAno(){
     inputAno.previousElementSibling.classList.remove('ativo');
     inputAno.nextElementSibling.classList.remove('ativo');
   }
-  console.log(ano,anoAtual);
 }
 
 
@@ -49,7 +50,6 @@ function calcularIdade(dataNascimento){
     const dataAtual = new Date();
     const dataAtualMs = dataAtual.getTime();
     const dataNascimentoMs = dataNascimento.getTime();
-    console.log(dataAtual,dataNascimento);
     calcularAnoMesesDias(dataAtualMs,dataNascimentoMs);
   }
 }
@@ -88,9 +88,22 @@ function calcularAnoMesesDias(dataAtualMs,dataNascimentoMs){
 // Adicionar o resultado no DOM
 function resultado(resultadoFinal){
   const dataResultado = document.querySelectorAll('[data-resultado]');
-  console.log(resultadoFinal);
+  
   dataResultado.forEach((resultado,index) => {
-    resultado.innerText = resultadoFinal[index]
-  })
+    const incremento = resultadoFinal[index] / 200; 
+    let i = 0;
+    const teste = setInterval(() =>{
+      i = i + incremento;
+      resultado.innerText = parseInt(i);
+      if(i > resultadoFinal[index]){
+        resultado.innerText = resultadoFinal[index];
+        clearInterval(teste)
+      };
+    });
+  });
 }
 // Adicionar o resultado no DOM
+
+
+
+// Animar números
